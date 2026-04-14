@@ -1,12 +1,7 @@
+import "dotenv/config";
 import { PrismaClient } from "../app/generated/prisma/client";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
-import path from "path";
-
-const raw = (process.env.DATABASE_URL ?? "file:./dev.db").replace(/^file:/, "");
-const adapter = new PrismaBetterSqlite3({
-  url: path.resolve(process.cwd(), raw),
-});
-const prisma = new PrismaClient({ adapter });
+import { Pool } from "pg";
+import { PrismaPg } from "@prisma/adapter-pg";
 
 const products = [
   // ── AD_COPY (15) ──────────────────────────────────────────────
@@ -225,6 +220,10 @@ const products = [
 ];
 
 async function main() {
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  const adapter = new PrismaPg(pool);
+  const prisma = new PrismaClient({ adapter });
+
   console.log("🌱 Seeding products...");
 
   // Clear existing products first (safe for dev)
@@ -238,5 +237,4 @@ async function main() {
 }
 
 main()
-  .catch((e) => { console.error(e); process.exit(1); })
-  .finally(() => prisma.$disconnect());
+  .catch((e) => { console.error(e); process.exit(1); });

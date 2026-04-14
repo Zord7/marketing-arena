@@ -30,7 +30,12 @@
       "Bash(curl.exe -s -o NUL -w \"/ %{http_code}\\\\n\" http://localhost:3000/)",
       "Bash(taskkill /F /IM node.exe)",
       "Bash(taskkill //F //IM node.exe)",
-      "Bash(node -e \"const Database = require\\('better-sqlite3'\\); const db = new Database\\('./dev.db'\\); const count = db.prepare\\('SELECT COUNT\\(*\\) as c FROM Product'\\).get\\(\\); console.log\\('Products:', count.c\\); const users = db.prepare\\('SELECT COUNT\\(*\\) as c FROM User'\\).get\\(\\); console.log\\('Users:', users.c\\);\")"
+      "Bash(node -e \"const Database = require\\('better-sqlite3'\\); const db = new Database\\('./dev.db'\\); const count = db.prepare\\('SELECT COUNT\\(*\\) as c FROM Product'\\).get\\(\\); console.log\\('Products:', count.c\\); const users = db.prepare\\('SELECT COUNT\\(*\\) as c FROM User'\\).get\\(\\); console.log\\('Users:', users.c\\);\")",
+      "Bash(node -e \"require\\('dotenv'\\).config\\(\\); console.log\\('DATABASE_URL:', process.env.DATABASE_URL?.substring\\(0,40\\)\\)\")",
+      "Bash(node -e \"require\\('dotenv'\\).config\\(\\); console.log\\('URL:', process.env.DATABASE_URL?.slice\\(0,50\\)\\)\")",
+      "Bash(npx tsx:*)",
+      "Bash(DATABASE_URL=\"postgresql://neondb_owner:npg_xNdEavj3J6Kt@ep-long-rice-ale6r6oj.c-3.eu-central-1.aws.neon.tech/neondb?sslmode=require\" npx tsx prisma/seed.ts)",
+      "Bash(node -e \"require\\('dotenv'\\); console.log\\('dotenv ok'\\)\")"
     ]
   }
 }

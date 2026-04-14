@@ -14,11 +14,11 @@ export async function POST(req: NextRequest) {
 
   const userId = session.user.id;
 
-  // Check if user already has an active/waiting match
+  // Block only if user has an ongoing (WAITING or ACTIVE) match — JUDGING is fine to overlap
   const existingActive = await prisma.match.findFirst({
     where: {
       OR: [{ player1Id: userId }, { player2Id: userId }],
-      status: { in: ["WAITING", "ACTIVE", "JUDGING"] },
+      status: { in: ["WAITING", "ACTIVE"] },
     },
   });
   if (existingActive) {
