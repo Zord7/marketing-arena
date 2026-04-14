@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@14 . --typescript --tailwind --app --no-src-dir --import-alias \"@/*\" --no-eslint --yes)",
+      "Bash(cd /tmp)",
+      "Bash(npx create-next-app@14 marketing_arena_temp --typescript --tailwind --app --no-src-dir --import-alias \"@/*\" --no-eslint --yes)",
+      "Bash(npx prisma:*)",
+      "Bash(npx tsc:*)",
+      "Bash(node -e \"const m = require\\('@prisma/adapter-better-sqlite3'\\); console.log\\(Object.keys\\(m\\)\\)\")",
+      "Bash(node -e \"const {PrismaBetterSqlite3} = require\\('@prisma/adapter-better-sqlite3'\\); console.log\\(PrismaBetterSqlite3.toString\\(\\).slice\\(0, 300\\)\\)\")",
+      "Bash(timeout 30 npm run dev)",
+      "Bash(npm run:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \" %{http_code}\" http://localhost:3000/login)",
+      "Bash(curl -s -o /dev/null -w \" %{http_code}\" http://localhost:3000/register)",
+      "Bash(kill %1)",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(npm install:*)",
+      "Bash(ls D:/marketing_arena/*.db D:/marketing_arena/prisma/*.db)",
+      "Bash(node -e \"const Database = require\\('better-sqlite3'\\); const db = new Database\\('D:/marketing_arena/prisma/dev.db'\\); console.log\\('Tables \\(prisma/dev.db\\):', db.prepare\\(\\\\\"SELECT name FROM sqlite_master WHERE type='table'\\\\\"\\).all\\(\\).map\\(r=>r.name\\)\\);\")",
+      "Bash(node -e \"const Database = require\\('better-sqlite3'\\); const db = new Database\\('D:/marketing_arena/dev.db'\\); console.log\\('Tables \\(dev.db root\\):', db.prepare\\(\\\\\"SELECT name FROM sqlite_master WHERE type='table'\\\\\"\\).all\\(\\).map\\(r=>r.name\\)\\);\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/dashboard)",
+      "Bash(curl -s -o /dev/null -w \"/ → %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"/dashboard → %{http_code}\\\\n\" http://localhost:3000/dashboard)",
+      "Bash(curl -s -o /dev/null -w \"/login → %{http_code}\\\\n\" http://localhost:3000/login)",
+      "Bash(curl -s -o /dev/null -w \"/ -> %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"/dashboard -> %{http_code}\\\\n\" http://localhost:3000/dashboard)",
+      "Bash(curl -s -o /dev/null -w \"/login -> %{http_code}\\\\n\" http://localhost:3000/login)",
+      "Bash(curl.exe -s -o NUL -w \"/ %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(taskkill //F //IM node.exe)",
+      "Bash(node -e \"const Database = require\\('better-sqlite3'\\); const db = new Database\\('./dev.db'\\); const count = db.prepare\\('SELECT COUNT\\(*\\) as c FROM Product'\\).get\\(\\); console.log\\('Products:', count.c\\); const users = db.prepare\\('SELECT COUNT\\(*\\) as c FROM User'\\).get\\(\\); console.log\\('Users:', users.c\\);\")"
+    ]
+  }
+}

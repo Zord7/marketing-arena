@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum MatchCategory {
+  AD_COPY
+  VISUAL_AD
+}
+
+enum MatchStatus {
+  WAITING
+  ACTIVE
+  JUDGING
+  COMPLETED
+}
+
+model User {
+  id               String   @id @default(cuid())
+  email            String   @unique
+  username         String   @unique
+  passwordHash     String
+  image            String?
+  rankingPoints    Int      @default(0)
+  wins             Int      @default(0)
+  losses           Int      @default(0)
+  createdAt        DateTime @default(now())
+
+  matchesAsPlayer1 Match[]  @relation("MatchPlayer1")
+  matchesAsPlayer2 Match[]  @relation("MatchPlayer2")
+  votes            Vote[]
+}
+
+model Product {
+  id              String        @id @default(cuid())
+  name            String
+  description     String
+  targetAudience  String
+  keySellingPoint String
+  category        MatchCategory
+  matches         Match[]
+}
+
+model Match {
+  id                 String        @id @default(cuid())
+  category           MatchCategory
+  productId          String
+  product            Product       @relation(fields: [productId], references: [id])
+  player1Id          String
+  player1            User          @relation("MatchPlayer1", fields: [player1Id], references: [id])
+  player2Id          String?
+  player2            User?         @relation("MatchPlayer2", fields: [player2Id], references: [id])
+  status             MatchStatus   @default(WAITING)
+  player1Submission  String?
+  player2Submission  String?
+  player1ImageUrl    String?
+  player2ImageUrl    String?
+  winnerId           String?
+  createdAt          DateTime      @default(now())
+  deadline           DateTime?
+  judgingDeadline    DateTime?
+  votes              Vote[]
+}
+
+model Vote {
+  id        String   @id @default(cuid())
+  matchId   String
+  match     Match    @relation(fields: [matchId], references: [id])
+  voterId   String
+  voter     User     @relation(fields: [voterId], references: [id])
+  voteFor   Int      // 1 = player1, 2 = player2
+  createdAt DateTime @default(now())
+
+  @@unique([matchId, voterId])
+}
